@@ -7,11 +7,12 @@ import(
 
 func TestEctwo(t *testing.T){
   opts := &terraform.Options{
-     TerraformDir :"../modules/cluster/webapp",
+     TerraformDir :"../../modules/cluster/webapp",
 	 //Deploy the example
 	
   }
-   terraform.InitAndApply(t,opts)
-   ec2Name := terraform.OutputRequired(t,opts,"instance_id")
+   terraform.Init(t,opts)
+   terraform.Apply(t,opts)
+   //ec2Name := terraform.OutputRequired(t,opts,"instance_id")
 }
 
