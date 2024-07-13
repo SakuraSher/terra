@@ -2,7 +2,7 @@ terraform {
     required_version = "~>1.2"
   required_providers {
     azurerm={
-        required_version="~>3.23"
+        version="~>3.23"
     }
   }
 }
@@ -27,17 +27,17 @@ data "azurerm_service_plan" "myplan"{
 resource "azurerm_linux_web_app" "app" {
     name = var.app_name
     site_config {
-      
+      always_on = false
     }
     service_plan_id = data.azurerm_service_plan.myplan.id
     location = azurerm_resource_group.rg.location
-    resource_group_name = resource_group_name.name  
+    resource_group_name = azurerm_resource_group.rg.name 
 }
 
 resource "azurerm_application_insights" "name" {
   name =  "${var.app_name}-${var.environment}"
   location = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.name
+  resource_group_name = azurerm_resource_group.rg.name
   application_type = "web"
   tags = var.tags
 }

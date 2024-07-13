@@ -51,7 +51,7 @@ resource "azurerm_linux_web_app" "app" {
   connection_string {
     name  = "Database"
     type  = "SQLServer"
-    value = "Server=${each_value["serverdatabase_name"]}; Integrated Security=SSPI"
+    value = "Server=${each.value["serverdatabase_name"]}; Integrated Security=SSPI"
   }
 
 }
